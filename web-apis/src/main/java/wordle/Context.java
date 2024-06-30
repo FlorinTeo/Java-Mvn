@@ -39,7 +39,7 @@ public class Context extends TimerTask {
         _state = State.INITIALIZING;
         _timer = new Timer();
         // in 10ms load the database, then every minute cleanup orphaned sessions!
-        _timer.schedule(this, 10, 60000);
+        _timer.schedule(this, 8, 60000);
     }
 
     public boolean isReady() {
@@ -119,7 +119,7 @@ public class Context extends TimerTask {
     public void runInitialize() {
         synchronized(_state) {
             _state = State.LOADING;
-            System.out.printf("~~~~ Context state: %s ~~~~\n", _state.name());
+            System.out.printf("~~~~ Wordle context state: %s ~~~~\n", _state.name());
         }
         String wordleDbPath = _servletContext.getRealPath("WEB-INF\\classes\\wordle\\res\\wordle.csv");
         System.out.println(wordleDbPath);
@@ -148,12 +148,12 @@ public class Context extends TimerTask {
         System.out.printf("Wordle Database loaded ... [%d] words\n", count);
         synchronized(_state) {
             _state = State.SORTING;
-            System.out.printf("~~~~ Context state: %s ~~~~\n", _state.name());
+            System.out.printf("~~~~ Wordle context state: %s ~~~~\n", _state.name());
         }
         Collections.sort(_words);
         synchronized(_state) {
             _state = State.READY;
-            System.out.printf("~~~~ Context state: %s ~~~~\n", _state.name());
+            System.out.printf("~~~~ Wordle context state: %s ~~~~\n", _state.name());
         }
     }
 
