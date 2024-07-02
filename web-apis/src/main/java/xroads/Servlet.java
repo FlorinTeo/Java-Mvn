@@ -34,6 +34,7 @@ public class Servlet extends HttpServlet{
     @SuppressWarnings("null")
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String[]> params = request.getParameterMap();
+        _context.runInitialize();
         response.setContentType("text/plain");
         response.getOutputStream().print("Not implemented yet!");
     }
